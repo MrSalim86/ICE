@@ -1,0 +1,146 @@
+@startuml
+class Main
+class Ingredient
+class Meal
+class DbIO
+class TextUI
+class Menu
+class Day
+class RandomGenerator
+class DisplayFoodPlan
+
+Main *-- Menu
+Meal *-- Ingredient
+Menu *-- DbIO
+Menu o-- TextUI
+Menu *-- Meal
+Menu o-- RandomGenerator
+Menu o-- Day
+Menu o-- DisplayFoodPlan
+
+Meal : String description
+Meal : Boolean favorite
+Meal : Arraylist<Ingredient> ingredients
+Meal : String name
+Meal : float totalEnergy
+Meal : String type
+
+Meal : Meal(String, String)
+Meal : addIngredient(String,float,String,float,String):void
+Meal : getDescription()String
+Meal : getFavorite()Boolean
+Meal : getIngredients()ArrayList<Ingredient>
+Meal : getName()String
+Meal : getTotalEnergy()float
+Meal : getType()String
+Meal : setDescription(String)void
+Meal : setFavorite(String)void
+Meal : setTotalEnergy(float)void
+Meal : toString():String
+
+Main : Menu menu = new Menu();
+
+
+TextUI : Scanner keyboard
+
+TextUI : get()String
+TextUI : getInteger()int
+TextUI : getInteger(int,int)int
+TextUI : standardMenu(String,String[],String)int
+
+
+Menu : DbIO db
+Menu : ArrayList<Meal> meals
+Menu : DisplayFoodPlan planner
+Menu : RandomGenerator randomFood
+Menu : TextUI ui
+Menu : ArrayList<Day> weekplan
+
+Menu : Menu()
+Menu : addToWeekDay(Meal,ArrayList<Day>)void
+Menu : createWeek():ArrayList<Day>
+Menu : errorMissingMeals(ArrayList<Day>)void
+Menu : findmeals(String,ArrayList<Meal>)ArrayList<Meal>
+Menu : findType(String,ArrayList<Meal>ArrayList<Meal>
+Menu : generateMenu()void
+Menu : menuCollection()void
+Menu : personSeated(ArrayList<Day>)void
+Menu : pickMeal(ArrayList<Meal>,String)Meal
+Menu : pickType(ArrayList<Meal>,String)Meal
+Menu : searchMenu()
+Menu : setMealMenu()
+Menu : setSeated(int)void
+Menu : settingsMenu()void
+Menu : showFoodPlan()void
+Menu : showMealName(Meal)String
+
+
+Ingredient : float energyQuantity
+Ingredient : String energyUnit
+Ingredient : String name
+Ingredient : float quantity
+Ingredient : String unit
+
+Ingredient : Ingredient(String,float,String,float,String)
+Ingredient : getEnergyQuantity():float
+Ingredient : getEnergyUnit():String
+Ingredient : getName():String
+Ingredient : getQuantity():float
+Ingredient : getUnit():String
+Ingredient : setQuantity(float):void
+Ingredient : toString():String
+
+Day : Meal meal
+Day : String name
+Day : int personPrDay
+
+Day : Day(String)
+Day : getMeal()Meal
+Day : getName()String
+Day : getPersonPrDay()int
+Day : setMeal(Meal)void
+Day : setName(String)void
+Day : setPersonPrDay(int)void
+Day : toString()String
+
+RandomGenerator : int fish
+RandomGenerator : int fishDay
+RandomGenerator : int meat
+RandomGenerator : Random random
+RandomGenerator : ArrayList<Meal> sortedMeals
+RandomGenerator : int vegan
+
+RandomGenerator : RandomGenerator()
+RandomGenerator : fishDayMethod(ArrayList<Meal>,ArrayList<Day>)
+RandomGenerator : getFish()String
+RandomGenerator : getFishDay()String
+RandomGenerator : getMeat()String
+RandomGenerator : getVegan()String
+RandomGenerator : mealRandomizer(ArrayList<Meal>, ArrayList<Day>)void
+RandomGenerator : RandomGenerate(ArrayList<Meal>,ArrayList<Day>)void
+RandomGenerator : setFish()void
+RandomGenerator : setFishDay()void
+RandomGenerator : setMeat()void
+RandomGenerator : setVegan()void
+RandomGenerator : typeSorter(ArrayList<Meal>,ArrayList<Day>,String)void
+
+DbIO : connection:Connection
+DbIO : String:jdbcUrl
+DbIO : String:password
+DbIO : statement:Statement
+DbIO : String:username
+
+DbIO : generateMeals()ArrayList<Meal>
+
+DisplayFoodPlan : Map<String,Float> shoppingList
+DisplayFoodPlan : ArrayList<Ingredient> allIngredients
+
+DisplayFoodPlan : DisplayFoodPlan(ArrayList<Day>)
+DisplayFoodPlan : combineIngredientList(ArrayList<Day>)ArrayList<Ingredient>
+DisplayFoodPlan : getUnitType(String)String
+DisplayFoodPlan : quantityUpdate(Day)void
+DisplayFoodPlan : shoppingList(ArrayList<ingredient>)void
+DisplayFoodPlan : showDayMeal(Day)void
+DisplayFoodPlan : showShoppingList()void
+
+@enduml
